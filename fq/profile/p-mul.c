@@ -40,7 +40,8 @@ main()
     fmpz_t p;
     long d;
     fq_ctx_t ctx;
-    fq_t a,b,c;
+    fq_t c;
+    fq_struct a[REPS],b[REPS];
 
     flint_randinit(state);
     fmpz_init(p);
@@ -48,12 +49,12 @@ main()
     d = n_randint(state,10)+1;
     fq_ctx_init_conway(ctx,p,d,"a",PADIC_TERSE);
 
-    fq_init(a);
-    fq_init(b);
-    fq_init(c);
+    padic_poly_init2(&a[0],d);
+    padic_poly_init2(&b[0],d);
+    padic_poly_init2(c,d);
 
-    fq_randtest_not_zero(a,state,ctx);
-    fq_randtest_not_zero(b,state,ctx);
+    fq_randtest_not_zero(&a[0],state,ctx);
+    fq_randtest_not_zero(&b[0],state,ctx);
 
     printf("MUL benchmark:single repeated multiplication: \n");
     timeit_start(t0);
@@ -62,13 +63,17 @@ main()
     printf ( " cpu = %ld ms, wall = %ld ms \n " , t0->cpu , t0->wall );
 
     printf("random multiplications: \n");
-    timeit_start(t0);
+
     for(i=0;i<REPS;i++)
     {
-    fq_randtest(a,state,ctx);
-    fq_randtest(b,state,ctx);
-    fq_mul(c,a,b,ctx);
+        if(i != 0) padic_poly_init2(&a[i],d);
+        if(i != 0) padic_poly_init2(&b[i],d);
+        fq_randtest(&a[i],state,ctx);
+        fq_randtest(&b[i],state,ctx);
     }
+
+    timeit_start(t0);
+    for(i=0;i<REPS;i++) fq_mul(c,a,b,ctx);
     timeit_stop(t0);
     printf ( " cpu = %ld ms, wall = %ld ms \n " , t0->cpu , t0->wall );
 
