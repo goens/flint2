@@ -1,0 +1,5 @@
+libflint2 (2.4-1) UNRELEASED; urgency=low #for release change to unstable
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Andrés Goens <andres@goens.org>  Wed, 15 May 2013 14:43:43 +0200

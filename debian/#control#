@@ -1,0 +1,32 @@
+Source: libflint2
+Priority: optional
+Maintainer: Andrés Goens <andres@goens.org>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, libmpfr-dev, libgmp-dev, locales, libc6-dev
+Standards-Version: 3.9.4 
+Section: libs
+Homepage: http://www.flintlib.org/
+#Vcs-Git: git://git.debian.org/collab-maint/libflint2.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/libflint2.git;a=summary
+
+Package: libflint2-dev
+Section: libdevel
+Architecture: any
+Depends: libmpfr-dev, libgmp-dev
+Conflicts: libflint-dev
+Breaks: libflint-dev
+Replaces: libflint-dev
+Description: Fast Library for Number Theory
+ FLINT provides types and functions for computing over various base rings. 
+ FLINT uses many new algorithms and is sometimes orders of magnitude faster
+ than other available software.
+ .
+ FLINT is written in ANSI C and runs on many platforms,
+ but is currently mostly optimised for x86 and x86-64 architectures.
+ It is designed to be threadsafe. 
+
+ # Package: libflint2BROKEN
+# Section: libs
+# Architecture: any
+# Depends: ${shlibs:Depends}, ${misc:Depends}
+# Description: <insert up to 60 chars description>
+#  <insert long description, indented with spaces>
